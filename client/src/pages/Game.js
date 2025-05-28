@@ -7,7 +7,7 @@ import Unauthorized from "./Unauthorized";
 import Loading from '../components/Loading';
 import Divider from '../components/Divider';
 
-import gameCover from "../assets/game_cover.jpg";
+import gameCover from "../assets/game_cover.webp";
 
 const Game = () => {
     const params = useParams();
