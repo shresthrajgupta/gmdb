@@ -20,7 +20,6 @@ const HorizontalScroll = ({ data = [], heading }) => {
                 <div ref={containerRef} className='grid grid-cols-[repeat(auto-fit,230px)] gap-6 grid-flow-col overflow-hidden overflow-x-scroll relative z-10 scroll-smooth transition-all scrollbar-none'>
                     {
                         data.map((datum, index) => {
-                            // console.log(datum);
                             return (
                                 <Card key={datum.id} data={datum} index={index + 1} />
                             )

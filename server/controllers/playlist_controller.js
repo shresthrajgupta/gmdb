@@ -26,9 +26,6 @@ const showPlaylistController = async (req, res, next) => {
         userPopulated.totalPages = totalCount;
 
         const payload = { _id: userPopulated._id, toPlay: userPopulated.toPlay, totalPages: totalCount };
-        // payload.data.totalPages = totalCount;
-
-        // console.log(payload);
 
         res.status(200).json({
             message: "Playlist fetched successfully",

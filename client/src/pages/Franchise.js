@@ -30,8 +30,6 @@ const Franchise = () => {
 
             setData(response?.data?.data);
 
-            // console.log(response.data.data);
-
         } catch (err) {
             if (err?.response?.status === 401)
                 setIsUnauthorized(true);
@@ -97,7 +95,6 @@ const Franchise = () => {
                             <p>Last updated at {moment(data?.updatedAt).format("Do MMMM YYYY")}</p>
                         </div>
                     </div>
-
                 </div>
         )
     )

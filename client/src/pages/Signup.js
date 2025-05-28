@@ -36,8 +36,6 @@ const SignUpForm = () => {
 
         setErrors(newErrors);
 
-        // console.log(newErrors);
-
         return Object.keys(newErrors).length === 0;
     };
 
@@ -93,7 +91,6 @@ const SignUpForm = () => {
                     setServerError('OTP mismatch');
 
             } catch (error) {
-                // console.error('Error:', error);
                 setServerError(error?.response?.data?.error || 'An error occurred, please try again.');
             }
         } else {
@@ -109,8 +106,6 @@ const SignUpForm = () => {
                         }
                     });
 
-                    // console.log("response", response);
-
                     if (response.status === 200) {
                         const token = response?.data?.data?.token;
                         if (token) {
@@ -121,7 +116,6 @@ const SignUpForm = () => {
                         setServerError(response?.data?.message || 'An error occurred, please try again later.');
 
                 } catch (error) {
-                    // console.error('Error:', error);
                     setServerError(error?.response?.data?.error || 'An error occurred, please try again later.');
                 }
             }

@@ -27,9 +27,6 @@ const showCompletedListController = async (req, res, next) => {
         userPopulated.totalPages = totalCount;
 
         const payload = { _id: userPopulated._id, finished: userPopulated.finished, totalPages: totalCount };
-        // payload.data.totalPages = totalCount;
-
-        // console.log(payload);
 
         res.status(200).json({
             message: "Completed list fetched successfully",

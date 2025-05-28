@@ -34,8 +34,6 @@ const Game = () => {
             setPlaying(response?.data?.data?.isPlaying);
             setCompleted(response?.data?.data?.isCompleted);
 
-            // console.log(response.data.data);
-
         } catch (err) {
             if (err?.response?.status === 401)
                 setIsUnauthorized(true);
@@ -59,8 +57,6 @@ const Game = () => {
                     }
                 );
 
-                // console.log(response);
-
                 if (response.status === 200) {
                     setPlaying(true);
                     setCompleted(false);
@@ -76,8 +72,6 @@ const Game = () => {
                     }
                 }
                 );
-
-                // console.log(response);
 
                 if (response.status === 200) {
                     setPlaying(false);
@@ -102,8 +96,6 @@ const Game = () => {
                     }
                 );
 
-                // console.log(respose);
-
                 if (response.status === 200) {
                     setPlaying(false);
                     setCompleted(true);
@@ -119,8 +111,6 @@ const Game = () => {
                     }
                 }
                 );
-
-                // console.log(response);
 
                 if (response.status === 200) {
                     setPlaying(false);
@@ -150,7 +140,7 @@ const Game = () => {
                     </div>
 
                     <div className='container mx-auto px-3 py-2 lg:py-0 flex flex-col lg:flex-row gap-5 lg:gap-10'>
-                        <div className='relative mx-auto lg:-mt-28 lg:mx-0 w-fit min-w-60'>
+                        <div className='relative mx-auto lg:-mt-28 lg:mx-0 w-fit min-w-60 mt-20'>
                             <img src={data.poster} alt='poster' className='h-80 w-60 object-cover rounded' />
                             <button onClick={changePlaylist} className={`mt-4 w-full py-2 text-center text-black rounded font-bold text-lg ${playing ? "bg-gradient-to-l from-red-500 to-orange-500" : "bg-white"} hover:scale-105 transition-all`}> Playlist </button>
                             <button onClick={changeCompletedlist} className={`mt-4 w-full py-2 text-center text-black rounded font-bold text-lg ${completed ? "bg-gradient-to-l from-red-500 to-orange-500" : "bg-white"} hover:scale-105 transition-all`}> Completed </button>
@@ -332,4 +322,4 @@ const Game = () => {
     )
 }
 
-export default Game
+export default Game;

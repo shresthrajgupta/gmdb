@@ -4,7 +4,7 @@ function importAll(r) {
     return images;
 }
 
-const covers = importAll(require.context('../assets/covers', false, /\.(png|jpe?g|svg)$/));
+const covers = importAll(require.context('../assets/covers', false, /\.(png|jpe?g|webp|svg)$/));
 
 export default covers;
 

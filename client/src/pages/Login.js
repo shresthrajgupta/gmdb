@@ -19,8 +19,6 @@ const Login = () => {
     if (!email || !/\S+@\S+\.\S+/.test(email)) newErrors.email = 'Invalid Email or Password';
     if (!password || password.length < 8 || password.length > 15) newErrors.password = 'Invalid Email or Password';
 
-    // console.log(newErrors);
-
     return Object.keys(newErrors).length === 0;
   };
 
@@ -48,8 +46,6 @@ const Login = () => {
           }
         });
 
-        // console.log("response", response);
-
         if (response.status === 200) {
           const token = response?.data?.data?.token;
           if (token) {
@@ -60,7 +56,6 @@ const Login = () => {
           setServerError(response?.data?.message || 'An error occurred, please try again later.');
 
       } catch (error) {
-        // console.error('Error:', error);
         setServerError(error?.response?.data?.error || 'An error occurred, please try again later.');
       }
     }
@@ -132,4 +127,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Login;

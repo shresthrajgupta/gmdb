@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 import logo from "../assets/logo.png";
-import userIcon from "../assets/user.png";
+import userIcon from "../assets/user2.png";
 import { navigation } from '../constants/navigation';
 
 import { IoSearchOutline } from "react-icons/io5";
@@ -12,9 +12,12 @@ import { IoSearchOutline } from "react-icons/io5";
 const Header = () => {
     const navigate = useNavigate();
 
+    const boxRef = useRef(null);
+
     const [searchInput, setSearchInput] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [loadingSearch, setLoadingSearch] = useState(false);
+    const [tapUserButton, setTapUserButton] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,16 +30,28 @@ const Header = () => {
         setSearchInput("");
     };
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (boxRef.current && !boxRef.current.contains(event.target)) {
+                setTapUserButton(false);
+            }
+        };
+
+        if (tapUserButton) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [tapUserButton]);
 
     useEffect(() => {
         const delayBounce = setTimeout(async () => {
             const value = searchInput
 
-            // console.log(value);
-
             if (value) {
                 setLoadingSearch(true);
-
 
                 try {
                     const response = await axios.get(`game/search?q=${value}`, {
@@ -46,7 +61,6 @@ const Header = () => {
                         }
                     });
 
-                    // console.log(response.data.data);
                     setSearchResults(response.data.data);
                 } catch (error) {
                     console.error('Error fetching search results:', error);
@@ -55,9 +69,7 @@ const Header = () => {
             } else {
                 setSearchResults([]);
             }
-
-
-        }, 100);
+        }, 250);
 
         return () => clearTimeout(delayBounce);
     }, [searchInput]);
@@ -111,7 +123,6 @@ const Header = () => {
                                         <li
                                             key={result.id}
                                             className='px-4 py-2 hover:bg-neutral-600 cursor-pointer rounded'
-                                        // onClick={() => handleResultClick(result)}
                                         >
                                             <Link to={result.url} onClick={() => setSearchInput("")} >{result.name}</Link>
                                         </li>
@@ -121,8 +132,25 @@ const Header = () => {
                         }
                     </div>
 
-                    <div className='w-8 h-8 rounded-full overflow-hidden cursor-pointer active:scale-90 transition-all'>
-                        <img src={userIcon} alt='user' />
+                    <div className='relative w-8 h-8 rounded-full cursor-pointer'>
+                        <img className='active:scale-90 transition-all' src={userIcon} alt='user' onClick={() => setTapUserButton((tapUserButton) => !tapUserButton)} />
+
+                        {
+                            tapUserButton &&
+                            <ul className='absolute right-0 bg-opacity-90 rounded-lg mt-2 bg-neutral-800' ref={boxRef}>
+                                <li className='px-4 py-2 hover:bg-neutral-600 cursor-pointer rounded'>
+                                    <Link to={"/about"}>About</Link>
+                                </li>
+
+                                <li className='px-4 py-2 hover:bg-neutral-600 cursor-pointer rounded'>
+                                    <p onClick={() => {
+                                        localStorage.removeItem("token");
+                                        navigate('/login');
+                                    }}>Logout</p>
+                                </li>
+                            </ul>
+                        }
+
                     </div>
                 </div>
             </div>

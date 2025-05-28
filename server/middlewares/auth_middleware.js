@@ -17,7 +17,6 @@ const isLoggedIn = async (req, res, next) => {
     try {
         const data = parseUtil(req);
 
-        // const user = await User.findById(data.id).populate("toPlay", "name id guid poster url").exec();
         const user = await User.findById(data.id).populate({ path: "toPlay", select: "name id guid poster url", options: { limit: 8 } }).exec();
 
         if (!user)

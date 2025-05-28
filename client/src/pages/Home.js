@@ -79,7 +79,9 @@ const Home = () => {
                                     const arr = key.split("|");
                                     const name = arr[0];
                                     let url = arr[1].split("_").join("/");
-                                    url = url.substring(0, url.length - 4);
+                                    url = url.substring(0, url.length - 5);
+
+                                    console.log("URL", url);
 
                                     return (
                                         <div key={key} className='lg:min-h-full min-h-[450px] min-w-full overflow-hidden relative group transition-all' style={{ transform: `translateX(-${currentImage * 100}%)` }}>
@@ -133,4 +135,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Home;

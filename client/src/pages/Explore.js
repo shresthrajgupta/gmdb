@@ -16,8 +16,6 @@ const Explore = () => {
     const [loading, setLoading] = useState(true);
     const [shouldFetch, setShouldFetch] = useState(false);
 
-    // const field = location.pathname.slice(1) === "playlist" ? "toPlay" : "finished";
-
     const fetchData = async () => {
         try {
             setLoading(true);
@@ -29,8 +27,6 @@ const Explore = () => {
                 params: { page: pageNo }
             });
 
-            // console.log(response.data.data);
-
             setData((prev) => {
                 const toPlay = response?.data?.data?.toPlay || [];
                 const finished = response?.data?.data?.finished || [];
@@ -39,8 +35,6 @@ const Explore = () => {
                 return [...prev, ...final];
             });
             setTotalPage(response.data.data.totalPages);
-
-            // console.log(response.data.data.totalPages);
 
         } catch (err) {
             if (err?.response?.status === 401)
@@ -56,23 +50,8 @@ const Explore = () => {
         const buffer = 10;
         if ((window.innerHeight + window.scrollY + buffer) >= document.body.offsetHeight) {
             setPageNo(prev => prev + 1);
-            // console.log(pageNo);
         }
     };
-
-    // useEffect(() => {
-    //     window.addEventListener("scroll", handleScroll);
-    //     return () => window.removeEventListener("scroll", handleScroll);
-    // }, []);
-
-    // useEffect(() => {
-    //     fetchData();
-    // }, [pageNo, location?.pathname]);
-
-    // useEffect(() => {
-    //     setPageNo(1);
-    //     setData([]);
-    // }, [location?.pathname]);
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
@@ -124,10 +103,8 @@ const Explore = () => {
                         </div>
                         : <div></div>
                 }
-
-
             </div>
     )
 }
 
-export default Explore
+export default Explore;
