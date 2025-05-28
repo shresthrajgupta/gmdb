@@ -9,6 +9,11 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(require("cors")());
 
+app.use(cors({
+  origin: 'https://gmdb-frontend.onrender.com',
+  credentials: true,
+}));
+
 const userRoute = require("./routes/user_route");
 const gameRoute = require("./routes/game_route");
 const franchiseRoute = require("./routes/franchise_route");
