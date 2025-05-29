@@ -1,6 +1,6 @@
 # GMDB – Game Management Database
 
-GMDB is a web application designed to help gamers track their game progress. Whether you're currently playing, have completed, or plan to play a game, GMDB allows you to manage and monitor your gaming journey. Inspired by IMDb, GMDB brings a similar experience tailored for games.
+GMDB is a comprehensive web application designed to help gamers track their gaming journey. Inspired by IMDb's movie tracking system, GMDB brings a similar experience tailored specifically for video games. Whether you're currently playing, have completed, or planning to play a game, GMDB allows you to manage and monitor your entire gaming collection in one place.
 
 ### Screenshots
 
@@ -17,15 +17,16 @@ GMDB is a web application designed to help gamers track their game progress. Whe
 ***
 
 ### Features
-- **User Authentication**: Secure login and signup functionality to protect user data
-- **Game Tracking**: Add games to your list and update their status (Playing, Completed, etc.)
-- **Search Functionality**: Search for games to add to your collection
-- **Responsive Design**: Optimized for various devices to ensure a seamless user experience
+- **User Authentication**: Secure login and signup functionality with JWT-based authentication
+- **Game Tracking**: Add games to your personal collection and update their status
+- **Search Functionality**: Powerful search feature to discover and add games to your collection
+- **Rating System**: Rate games on a scale and share your personal gaming experiences
+- **Responsive Design**: Fully optimized for desktop, tablet, and mobile devices
 
 ***
 
 ### Technologies Used
-- **Frontend**: HTML, CSS, JavaScript
+- **Frontend**: React.js
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
 - **Authentication**: JSON Web Tokens (JWT)
