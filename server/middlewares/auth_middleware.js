@@ -17,13 +17,13 @@ const isLoggedIn = async (req, res, next) => {
     try {
         const data = parseUtil(req);
 
-        const user = await User.findById(data.id).populate({ path: "toPlay", select: "name id guid poster url", options: { limit: 8 } }).exec();
+        // const user = await User.findById(data.id).populate({ path: "toPlay", select: "name id guid poster url", options: { limit: 8 } }).exec();
+        const user = await User.findById(data.id).select('_id name email isAdmin createdAt updatedAt').exec();
 
         if (!user)
             return res.status(400).json({ error: "User not found" });
 
         const userObj = user.toObject();
-        delete userObj["password"];
 
         req.user = userObj;
         req.token = token

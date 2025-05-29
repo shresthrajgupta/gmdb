@@ -1,12 +1,14 @@
 const axios = require("axios");
 
+const User = require("../models/user_model");
+
 const ytkey = process.env.YT_API;
 
 const homepageController = async (req, res, next) => {
     try {
         const user = req.user;
 
-        const finalResponse = { ...user };
+        const finalResponse = await User.findById(user._id).populate({ path: "toPlay", select: "name id guid poster url", options: { limit: 8 } }).exec();
 
         // const trailercall = `https://www.googleapis.com/youtube/v3/search?key=${ytkey}&channelId=UCJx5KP-pCUmL9eZUv-mIcNw&part=snippet,id&order=date&maxResults=8`;
         // const trailerData = await axios.get(trailercall).then(response => response.data);

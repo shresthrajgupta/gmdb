@@ -24,6 +24,7 @@ const SignUpForm = () => {
         otp: ''
     });
     const [showOtp, setShowOtp] = useState(false);
+    const [disabledBtn, setDisabledBtn] = useState(false);
 
     const validateForm = () => {
         const newErrors = {};
@@ -63,12 +64,15 @@ const SignUpForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        setDisabledBtn(true);
+
         setServerError("");
 
         if (showOtp) {
             const otpError = validateOtp();
             if (otpError) {
                 setServerError(otpError);
+                setDisabledBtn(false);
                 return;
             }
 
@@ -87,11 +91,15 @@ const SignUpForm = () => {
                     localStorage.removeItem('token');
                     navigate('/login');
                 }
-                else
+                else {
                     setServerError('OTP mismatch');
+                }
+
+                setDisabledBtn(false);
 
             } catch (error) {
                 setServerError(error?.response?.data?.error || 'An error occurred, please try again.');
+                setDisabledBtn(false);
             }
         } else {
             if (validateForm()) {
@@ -112,13 +120,20 @@ const SignUpForm = () => {
                             localStorage.setItem('token', token);
                             setShowOtp(true);
                         }
-                    } else
+                    } else {
                         setServerError(response?.data?.message || 'An error occurred, please try again later.');
+                    }
+
+                    setDisabledBtn(false);
 
                 } catch (error) {
                     setServerError(error?.response?.data?.error || 'An error occurred, please try again later.');
+
+                    setDisabledBtn(false);
                 }
             }
+
+            setDisabledBtn(false);
         }
     };
 
@@ -159,7 +174,8 @@ const SignUpForm = () => {
 
                                     <button
                                         type="submit"
-                                        className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+                                        disabled={disabledBtn}
+                                        className={`w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600 ${disabledBtn ? 'opacity-50 cursor-not-allowed' : ''}`}
                                     >
                                         Verify OTP
                                     </button>
@@ -230,7 +246,8 @@ const SignUpForm = () => {
                                     </div>
                                     <button
                                         type="submit"
-                                        className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+                                        disabled={disabledBtn}
+                                        className={`w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600 ${disabledBtn ? 'opacity-50 cursor-not-allowed' : ''}`}
                                     >
                                         Sign Up
                                     </button>

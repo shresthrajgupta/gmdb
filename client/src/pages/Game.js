@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from "axios";
 import moment from "moment";
@@ -8,6 +8,8 @@ import Loading from '../components/Loading';
 import Divider from '../components/Divider';
 
 import gameCover from "../assets/game_cover.webp";
+
+const StarRating = lazy(() => import('../components/starRating'));
 
 const Game = () => {
     const params = useParams();
@@ -122,6 +124,8 @@ const Game = () => {
         }
     };
 
+
+
     useEffect(() => {
         fetchData();
     }, [params.id])
@@ -149,6 +153,13 @@ const Game = () => {
                         <div>
                             <h2 className='text-2xl lg:text-4xl my-2 font-bold text-white'> {data.name} </h2>
                             <p className='text-neutral-400'> {data.deck} </p>
+
+                            <Divider />
+
+                            <Suspense fallback={<p>Loading...</p>}>
+                                <StarRating gameId={params.id} />
+                            </Suspense>
+
 
                             <Divider />
 

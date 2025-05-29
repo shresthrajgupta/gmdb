@@ -42,27 +42,27 @@ router.post(
     loginController
 );
 
-router.post(
-    "/forgot_otp",
-    [
-        body("email", "Please provide an email").trim().isEmail(),
-        body("password", "Please provide a password").isLength({ min: 8 }),
-        body("retype_password", "Passwords must be same").isLength({ min: 8 })
-    ],
-    validateInputUtil,
-    forgotPassOtp
-);
+// router.post(
+//     "/forgot_otp",
+//     [
+//         body("email", "Please provide an email").trim().isEmail(),
+//         body("password", "Please provide a password").isLength({ min: 8 }),
+//         body("retype_password", "Passwords must be same").isLength({ min: 8 })
+//     ],
+//     validateInputUtil,
+//     forgotPassOtp
+// );
 
-router.post(
-    "/forgot_verify",
-    [
-        body("otp", "Invalid OTP").isLength({ min: 6, max: 6 }),
-    ],
-    validateInputUtil,
-    forgotPassVerify
-);
+// router.post(
+//     "/forgot_verify",
+//     [
+//         body("otp", "Invalid OTP").isLength({ min: 6, max: 6 }),
+//     ],
+//     validateInputUtil,
+//     forgotPassVerify
+// );
 
-router.get("/profile", isLoggedIn, getProfileController);
+// router.get("/profile", isLoggedIn, getProfileController);
 
 // router.put("/profile", isLoggedIn, updateProfile);
 

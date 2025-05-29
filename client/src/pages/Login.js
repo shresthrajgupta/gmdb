@@ -11,6 +11,7 @@ const Login = () => {
     email: '',
     password: ''
   });
+  const [disabledBtn, setDisabledBtn] = useState(false);
 
   const validateForm = () => {
     const newErrors = {};
@@ -33,6 +34,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setDisabledBtn(true);
     setServerError("");
 
     if (validateForm()) {
@@ -52,15 +54,20 @@ const Login = () => {
             localStorage.setItem('token', token);
             navigate('/home');
           }
-        } else
+        } else {
           setServerError(response?.data?.message || 'An error occurred, please try again later.');
+          setDisabledBtn(false);
+        }
 
       } catch (error) {
         setServerError(error?.response?.data?.error || 'An error occurred, please try again later.');
+        setDisabledBtn(false);
       }
     }
-    else
+    else {
       setServerError("Invalid Email or Password");
+      setDisabledBtn(false);
+    }
   }
 
   useEffect(() => {
@@ -108,7 +115,8 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+            disabled={disabledBtn}
+            className={`w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600 ${disabledBtn ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             Log In
           </button>

@@ -11,6 +11,7 @@ const gameDetailController = async (req, res, next) => {
         const mainGuid = req.params.guid;
 
         const mainGame = await Game.findOne({ guid: mainGuid }).populate("franchises", "name id guid url").populate("similar_games", "name id guid url").lean().exec();
+        
         if (mainGame && mainGame.deck !== "null") {
             let isPlaying = await User.findOne({
                 _id: req.user._id,
@@ -24,6 +25,7 @@ const gameDetailController = async (req, res, next) => {
 
             mainGame.isPlaying = isPlaying ? true : false;
             mainGame.isCompleted = isCompleted ? true : false;
+
             return res.status(200).json({ message: "Game data fetched successfully", data: mainGame });
         }
         else {
@@ -116,8 +118,6 @@ const gameDetailController = async (req, res, next) => {
 
             currGame.isPlaying = isPlaying ? true : false;
             currGame.isCompleted = isCompleted ? true : false;
-
-            // console.log(isPlaying, isCompleted);
 
             return res.status(200).json({ message: "Game data fetched successfully", data: currGame });
         }

@@ -45,7 +45,7 @@ const addCompletedListController = async (req, res, next) => {
 
         const user = await User.findById(id);
 
-        if (!user.finshed)
+        if (!user.finished)
             user.finished = [];
 
         if (user.finished.includes(gameId))

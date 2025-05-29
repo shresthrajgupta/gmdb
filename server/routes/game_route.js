@@ -5,6 +5,7 @@ const gameDetailController = require("../controllers/gamedetail_controller");
 const gameSearchController = require("../controllers/gamesearch_controller");
 const { addPlaylistController, delPlaylistController, showPlaylistController } = require("../controllers/playlist_controller");
 const { addCompletedListController, delCompletedListController, showCompletedListController } = require("../controllers/completedlist_controller");
+const { getRating, postRating } = require("../controllers/rating_controller");
 
 const validateInputUtil = require("../utils/validateinput_util");
 
@@ -54,6 +55,21 @@ router.post("/completedlist",
 router.delete("/completedlist",
     isLoggedIn,
     delCompletedListController
+);
+
+router.post("/rating",
+    isLoggedIn,
+    [
+        check("gameId", "gameId is required").notEmpty(),
+        check("score", "score must be between 0 and 5").isInt({ min: 0, max: 5 })
+    ],
+    validateInputUtil,
+    postRating
+);
+
+router.get("/rating/:gameId",
+    isLoggedIn,
+    getRating
 );
 
 module.exports = router;

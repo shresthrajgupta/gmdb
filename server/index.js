@@ -16,8 +16,8 @@ app.use(cors({
 }));
 
 // app.use(cors({
-//   origin: 'http://localhost:3000',
-//   credentials: true,
+//     origin: 'http://localhost:3000',
+//     credentials: true,
 // }));
 
 const userRoute = require("./routes/user_route");
