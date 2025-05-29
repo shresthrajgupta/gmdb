@@ -57,3 +57,11 @@ npm start
 
 4) Access the application:
 Open your browser and navigate to `http://localhost:3000`
+
+***
+
+### Contributing
+I welcome contributions from the community!
+
+### License
+This project is licensed under the MIT License
